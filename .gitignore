@@ -1,0 +1,6 @@
+node_modules
+mysql/bin
+datasources/mysql.datasource.json
+dist
+tsconfig.tsbuildinfo
+package-lock.json

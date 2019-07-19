@@ -1,0 +1,29 @@
+version: '3.5'
+
+services:
+
+   express-oauth:
+     build:
+       context: .
+       dockerfile: Dockerfile
+     env_file:
+       - .env.docker
+     container_name: express-oauth
+     working_dir: /code
+     volumes:
+       - .:/code
+       - ./docker/supervisord.conf:/etc/supervisor/conf.d/supervisord.conf
+     ports:
+       - 8080:80
+
+   express-oauth-mysql:
+     image: mysql:5.7
+     container_name: express-oauth-mysql
+     volumes:
+       - ./mysql/bin:/var/lib/mysql
+     restart: always
+     environment:
+       - MYSQL_ROOT_PASSWORD=password
+       - MYSQL_DATABASE=application
+     ports:
+       - 3380:3306
